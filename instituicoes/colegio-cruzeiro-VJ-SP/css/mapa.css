@@ -1,0 +1,68 @@
+/* Garante que o body e o pano tenham um fundo visível, se não for coberto pela imagem do panorama */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #222; /* Um fundo escuro para o HTML/BODY */
+}
+
+#pano {
+  width: 100%;
+  height: 100%;
+  background-color: #333; /* Um fundo escuro para o container do panorama */
+}
+
+
+/* Container para a seta (o círculo cinza) */
+.hotspot.arrow.forward {
+width: 80px; /* Tamanho do círculo */
+height: 80px; /* Tamanho do círculo */
+position: absolute;
+bottom: 20px;
+left: 50%;
+transform: translateX(-50%); /* A rotação será adicionada pelo JS */
+z-index: 1000;
+cursor: pointer;
+background-color: rgba(0, 0, 0, 0.5); /* Fundo cinza semi-transparente para o círculo */
+border-radius: 50%; /* Transforma o quadrado em círculo */
+display: flex; /* Usa flexbox para centralizar a seta interna */
+justify-content: center; /* Centraliza horizontalmente */
+align-items: center; /* Centraliza verticalmente */
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4); /* Sombra suave para dar profundidade */
+transition: background-color 0.2s ease; /* Transição suave para o efeito hover */
+
+/* --- LINHA TEMPORÁRIA PARA DIAGNÓSTICO --- */
+border: 1px solid red; /* Adiciona uma borda vermelha para ver o limite do elemento */
+/* --- REMOVA A LINHA ACIMA DEPOIS QUE O CÍRCULO CINZA APARECER --- */
+}
+
+/* Efeito ao passar o mouse */
+.hotspot.arrow.forward:hover {
+background-color: rgba(0, 0, 0, 0.7); /* Fica um pouco mais escuro ao passar o mouse */
+}
+
+/* A forma da seta (o 'V' branco) */
+.hotspot.arrow.forward::before,
+.hotspot.arrow.forward::after {
+content: '';
+position: absolute;
+width: 25px;
+height: 6px;
+background-color: rgba(255, 255, 255, 0.9); /* Cor branca semi-transparente para a seta */
+border-radius: 3px;
+top: 50%;
+left: 50%;
+transform-origin: center center;
+}
+
+/* Perna esquerda do 'V' (agora apontando para baixo-esquerda) */
+.hotspot.arrow.forward::before {
+transform: translate(-50%, -50%) rotate(-45deg) translate(-10px, 0); /* Ajustado para inverter */
+}
+
+/* Perna direita do 'V' (agora apontando para baixo-direita) */
+.hotspot.arrow.forward::after {
+transform: translate(-50%, -50%) rotate(45deg) translate(10px, 0); /* Ajustado para inverter */
+}
